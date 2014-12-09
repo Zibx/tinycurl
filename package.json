@@ -1,0 +1,24 @@
+{
+  "name": "tinycurl",
+  "version": "0.0.3",
+  "description": "Tiny curl wrapper. Can solve problems with making requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Zibx/tinycurl.git"
+  },
+  "keywords": [
+    "curl",
+    "request",
+    "ssl",
+    "pem",
+    "https"
+  ],
+  "author": "Zibx",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "5e6fbc15347100dcaf02aeedde8c52a23a23d3fa"
+}

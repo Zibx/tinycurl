@@ -1,10 +1,12 @@
+var observable = require('events').EventEmitter;
+var globalCallbacks = new observable(),
+    g = 0;
 (function(){
 
     var util = require( 'util' ),
         fs = require( 'fs' ),
         cwd = process.cwd(),
         slice = Array.prototype.slice,
-        observable = require('events').EventEmitter,
         child = require('child_process' ),
         emptyFn = function(){},
         convert = {
@@ -25,6 +27,9 @@
             low: emptyFn
         },
         obj = {
+            getGlobal: function(){
+                return globalCallbacks;
+            },
             getConvert: function(  ){
                 // for extension purpose
                 return convert;
@@ -79,7 +84,9 @@
                 args = Array.prototype.concat.apply([], args.map( function( el ){
                     return el.data;
                 }));
+                g++;
 
+                globalCallbacks.emit('request', url, options, g);
                 var curl = child.spawn('curl', args, { cwd: process.cwd() });
 
                 var out = '', err = '';
@@ -95,6 +102,7 @@
                 });
                 curl.on('exit', function (code) {
                     o.emit('exit', code);
+                    globalCallbacks.emit('finish', out, code, url, options, g);
                     callback(err, out);
                 });
 
@@ -111,7 +119,7 @@
         bonus = function( args, bonus ){
             args = slice.call(args);
             args[3] = bonus;
-            obj.request.apply( this, args );
+            return obj.request.apply( this, args );
         };
     exports = module.exports = obj;
 
