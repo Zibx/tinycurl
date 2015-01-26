@@ -86,7 +86,7 @@ var globalCallbacks = new observable(),
                 }));
                 g++;
 
-                globalCallbacks.emit('request', url, options, g);
+                globalCallbacks.emit('request', url, options, g, args);
                 var curl = child.spawn('curl', args, { cwd: process.cwd() });
 
                 var out = '', err = '';

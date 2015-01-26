@@ -1,6 +1,6 @@
 {
   "name": "tinycurl",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Tiny curl wrapper. Can solve problems with making requests",
   "main": "index.js",
   "scripts": {
